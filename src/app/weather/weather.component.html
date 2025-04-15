@@ -1,0 +1,34 @@
+<div class="container" style="max-width: 600px; margin: 50px auto;">
+  <h2>Weather Info</h2>
+  <div class="form-group">
+    <label>City</label>
+    <input type="text" [(ngModel)]="city" class="form-control" placeholder="Enter city" />
+  </div>
+  <div class="form-group">
+    <label>Date (optional)</label>
+    <input type="date" [(ngModel)]="date" class="form-control" />
+  </div>
+  <button (click)="getWeather()" class="btn btn-primary mt-3">Get Weather</button>
+
+  <div *ngIf="loading" class="mt-3">Loading...</div>
+
+  <div *ngIf="result" class="mt-3 alert alert-warning">{{ result }}</div>
+
+  <table *ngIf="weatherInfo" class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>City</td><td>{{ weatherInfo.name }}</td></tr>
+      <tr><td>Temperature</td><td>{{ weatherInfo.main.temp }} °C</td></tr>
+      <tr><td>Feels Like</td><td>{{ weatherInfo.main.feels_like }} °C</td></tr>
+      <tr><td>Humidity</td><td>{{ weatherInfo.main.humidity }} %</td></tr>
+      <tr><td>Weather</td><td>{{ weatherInfo.weather[0].description }}</td></tr>
+      <tr><td>Wind</td><td>{{ weatherInfo.wind.speed }} m/s</td></tr>
+      <tr><td>Pressure</td><td>{{ weatherInfo.main.pressure }} hPa</td></tr>
+    </tbody>
+  </table>
+</div>
