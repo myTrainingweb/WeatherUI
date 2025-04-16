@@ -1,34 +1,42 @@
-<div class="container" style="max-width: 600px; margin: 50px auto;">
-  <h2>Weather Info</h2>
-  <div class="form-group">
-    <label>City</label>
-    <input type="text" [(ngModel)]="city" class="form-control" placeholder="Enter city" />
+<div class="container" style="max-width: 700px; margin-top: 50px;">
+  <h2 class="mb-4 text-center">🌤️ Weather Info</h2>
+  <div class="card shadow-sm p-4">
+    <div class="form-group mb-3">
+      <label class="form-label">🏙️ City<span class="text-danger">*</span></label>
+      <input type="text" [(ngModel)]="city" class="form-control" placeholder="Enter city name" />
+    </div>
+    <div class="form-group mb-3">
+      <label class="form-label">📅 Date<span class="text-danger">*</span></label>
+      <input type="date" [(ngModel)]="date" class="form-control" />
+    </div>
+    <button (click)="getWeather()" class="btn btn-primary w-100">
+      🔍 Get Weather
+    </button>
+
+    <div *ngIf="loading" class="text-center mt-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div *ngIf="result" class="alert alert-warning mt-4">{{ result }}</div>
+
+    <table *ngIf="weatherInfo" class="table table-bordered table-hover mt-4">
+      <thead class="table-dark">
+        <tr>
+          <th>🔧 Parameter</th>
+          <th>📈 Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>🏙️ City</td><td>{{ weatherInfo.name }}</td></tr>
+        <tr><td>🌡️ Temperature</td><td>{{ weatherInfo.main.temp }} °C</td></tr>
+        <tr><td>🥵 Feels Like</td><td>{{ weatherInfo.main.feels_like }} °C</td></tr>
+        <tr><td>💧 Humidity</td><td>{{ weatherInfo.main.humidity }} %</td></tr>
+        <tr><td>🌥️ Weather</td><td>{{ weatherInfo.weather[0].description }}</td></tr>
+        <tr><td>🌬️ Wind</td><td>{{ weatherInfo.wind.speed }} m/s</td></tr>
+        <tr><td>📊 Pressure</td><td>{{ weatherInfo.main.pressure }} hPa</td></tr>
+      </tbody>
+    </table>
   </div>
-  <div class="form-group">
-    <label>Date (optional)</label>
-    <input type="date" [(ngModel)]="date" class="form-control" />
-  </div>
-  <button (click)="getWeather()" class="btn btn-primary mt-3">Get Weather</button>
-
-  <div *ngIf="loading" class="mt-3">Loading...</div>
-
-  <div *ngIf="result" class="mt-3 alert alert-warning">{{ result }}</div>
-
-  <table *ngIf="weatherInfo" class="table table-bordered mt-3">
-    <thead>
-      <tr>
-        <th>Parameter</th>
-        <th>Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>City</td><td>{{ weatherInfo.name }}</td></tr>
-      <tr><td>Temperature</td><td>{{ weatherInfo.main.temp }} °C</td></tr>
-      <tr><td>Feels Like</td><td>{{ weatherInfo.main.feels_like }} °C</td></tr>
-      <tr><td>Humidity</td><td>{{ weatherInfo.main.humidity }} %</td></tr>
-      <tr><td>Weather</td><td>{{ weatherInfo.weather[0].description }}</td></tr>
-      <tr><td>Wind</td><td>{{ weatherInfo.wind.speed }} m/s</td></tr>
-      <tr><td>Pressure</td><td>{{ weatherInfo.main.pressure }} hPa</td></tr>
-    </tbody>
-  </table>
 </div>

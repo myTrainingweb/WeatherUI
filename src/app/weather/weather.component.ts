@@ -1,7 +1,8 @@
-// weather.component.ts
-
 import { Component } from '@angular/core';
 import { WeatherService } from './weather.service';
+import { ToastrService } from 'ngx-toastr';
+import { CONTACT_ADMINISTRATOR, ERROR, INVALID_DATA } from '../Common/constant';
+
 
 @Component({
   selector: 'app-weather',
@@ -14,10 +15,19 @@ export class WeatherComponent {
   weatherInfo: any = null;
   loading = false;
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(private weatherService: WeatherService,    public toastr: ToastrService,
+  ) {}
 
   getWeather() {
-    if (!this.city) return alert('Please enter a city');
+    this.result = '';
+    this.weatherInfo = null;
+  
+    if (!this.city.trim() || !this.date.trim()) {
+      this.toastr.error(CONTACT_ADMINISTRATOR, ERROR);  
+
+      return;
+    }
+
     this.loading = true;
     this.result = '';
     this.weatherInfo = null;
@@ -35,6 +45,7 @@ export class WeatherComponent {
           }
         } catch (err) {
           this.result = 'Error parsing weather data';
+          this.toastr.error(INVALID_DATA, ERROR);  
         }
       },
       (err) => {

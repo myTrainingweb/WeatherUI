@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const ERROR = \"Error\";\nexport const SUCCESS = \"Success\";\nexport const WARNING = \"Warning\";\nexport const CONTACT_ADMINISTRATOR = \"Something went wrong. Please contact Administrator\";\nexport const INVALID_ = \"Something went wrong. Please contact Administrator\";","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
